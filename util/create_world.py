@@ -37,10 +37,12 @@ r_stairs = Room(title='Stairs', description="""As you ascend the stairs you noti
 r_chest = Room(title='Chest', description="""The chest is unlocked. As it opens intense red light fills the room. Sitting inside is a mysterious red orb. It looks valuable, maybe you should take it. """)
 
 
-for room in [r_entrance, r_desert, r_dust_devil, r_sandyhills, r_treasury,
-             r_crates, r_waterfall, r_river, r_rapids, r_cave, r_castle,
-             r_chamber, r_volcano, r_obsidianDoorway, r_stairs, r_chest]:
-             room.save()
+rooms = [r_entrance, r_desert, r_dust_devil, r_sandyhills, r_treasury,
+         r_crates, r_waterfall, r_river, r_rapids, r_cave, r_castle,
+         r_chamber, r_volcano, r_obsidianDoorway, r_stairs, r_chest]
+
+for room in rooms:
+    room.save()
 
 # Link rooms together
 r_chest.connectRooms(r_stairs, 'e')
@@ -77,7 +79,7 @@ r_castle.connectRooms(r_entrance, 's')
 
 r_rapids.connectRooms(r_river, 'w')
 
-r_dust_devil.connectRooms(r_desert, "s")
+r_dust_devil.connectRooms(r_desert, "e")
 
 r_sandyhills.connectRooms(r_desert, "w")
 r_sandyhills.connectRooms(r_crates, "e")
@@ -85,6 +87,9 @@ r_sandyhills.connectRooms(r_crates, "e")
 r_treasury.connectRooms(r_chamber, "w")
 
 r_crates.connectRooms(r_sandyhills, 'w')
+
+r_chamber.connectRooms(r_treasury, 'e')
+r_chamber.connectRooms(r_castle, 's')
 
 players=Player.objects.all()
 for p in players:
